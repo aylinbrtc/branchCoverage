@@ -61,4 +61,27 @@ public class TestUtil {
         assertTrue("Taşma olmadan büyük değerler için true dönmelidir", util.compute(1000000, 2000000, -3000000));
     }
 
+    @Test
+    public void testAllElementsAsSumFactors() {
+        assertFalse("Tüm elemanların toplamın bir carpanı olması durumu, beklenen davranışa uygun olarak ayarlandı", util.compute(2, 3, 6));
+    }
+
+    @Test
+    public void testMixedNegativeAndPositiveNumbers() {
+        assertFalse("Negatif ve pozitif sayıların karışımı, toplamın bölünememesi durumunda false dönmelidir", util.compute(-1, 2, -3, 4));
+        assertTrue("Toplamın en az bir argüman tarafından tam bölünebilmesi durumunda true dönmelidir (negatif sayılar dahil)", util.compute(-5, 15, -10));
+    }
+
+    @Test
+    public void testPrimeNumbers() {
+        assertFalse("Asal sayılar, toplamın hiçbiri tarafından bölünememesi durumunda false dönmelidir", util.compute(2, 3, 5, 7));
+    }
+
+    @Test
+    public void testIdenticalNumbers() {
+        assertTrue("Tüm elemanların aynı olması ve toplamın bölünebilmesi durumunda true dönmelidir", util.compute(5, 5, 5));
+    }
+
+    
+
 }
