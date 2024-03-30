@@ -31,5 +31,34 @@ public class TestUtil {
         assertFalse("Çift sayıda argüman false dönmelidir", util.compute(1, 2, 3, 4));
     }
 
+    @Test
+    public void testZeroArgument() {
+        try {
+            util.compute(1, 2, 0);
+            fail("Sıfır argümanı için RuntimeException bekleniyordu ancak atılmadı");
+        } catch (RuntimeException exception) {
+            // Test, RuntimeException fırlatıldığında geçer.
+        }
+    }
+
+    @Test
+    public void testDivisibleSumWithMultipleArguments() {
+        assertTrue("Toplamın en az bir argümana tam bölünmesi true dönmelidir", util.compute(1, 2, 3));
+    }
+
+    @Test
+    public void testMultipleZerosExpectingException() {
+        try {
+            util.compute(0, 0, 0, 0, 0);
+            fail("Girdide sıfır olduğunda RuntimeException bekleniyordu ancak atılmadı");
+        } catch (RuntimeException e) {
+        }
+    }
+
+
+    @Test
+    public void testLargeNumbers() {
+        assertTrue("Taşma olmadan büyük değerler için true dönmelidir", util.compute(1000000, 2000000, -3000000));
+    }
 
 }
