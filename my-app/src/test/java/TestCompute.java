@@ -29,8 +29,8 @@ public class TestCompute {
         when(mq.size()).thenReturn(3);
         when(mq.contains("Aylin")).thenReturn(true);
         when(mq.getAt(0)).thenReturn("AYLİN");
-        when(mq.getAt(1)).thenReturn("aylin");
-        when(mq.getAt(2)).thenReturn("Aylin");
+        when(mq.getAt(1)).thenReturn("Aylin");
+        when(mq.getAt(2)).thenReturn("aylin");
         
         assertEquals(1, compute.countNumberOfOccurrences("Aylin"));
     }
@@ -41,6 +41,24 @@ public class TestCompute {
         assertEquals(-1, compute.countNumberOfOccurrences("aylin"));
     }
 
-    
+    @Test
+    public void testCountNumberOfOccurrences_LargeQueue() {
+        when(mq.size()).thenReturn(1000);
+        when(mq.contains("a")).thenReturn(true);
+        for (int i = 0; i < 1000; i++) {
+            when(mq.getAt(i)).thenReturn(i % 2 == 0 ? "a" : "b");
+        }
+
+        assertEquals(500, compute.countNumberOfOccurrences("a"));
+    }
+
+    @Test
+    public void testCountNumberOfOccurrences_ElementNotFound() {
+        when(mq.size()).thenReturn(5);
+        when(mq.contains("test")).thenReturn(false);
+        assertEquals(0, compute.countNumberOfOccurrences("test"));
+    }
+
+
 
 }
