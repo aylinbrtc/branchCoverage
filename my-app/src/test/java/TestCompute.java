@@ -59,6 +59,16 @@ public class TestCompute {
         assertEquals(0, compute.countNumberOfOccurrences("test"));
     }
 
+    @Test
+    public void testCountNumberOfOccurrences_ElementFound() {
+        when(mq.size()).thenReturn(8);
+        when(mq.contains("a")).thenReturn(true);
+        when(mq.getAt(0)).thenReturn("a");
+        when(mq.getAt(1)).thenReturn("b");
+        when(mq.getAt(2)).thenReturn("a");
+        
+        assertEquals(2, compute.countNumberOfOccurrences("a"));
+    }
 
 
 }
