@@ -70,5 +70,39 @@ public class TestCompute {
         assertEquals(2, compute.countNumberOfOccurrences("a"));
     }
 
+      
+
+    @Test
+    public void testCountNumberOfOccurrences_SpecialCharacters() {
+        when(mq.size()).thenReturn(3);
+        when(mq.contains("@#%")).thenReturn(true);
+        when(mq.getAt(0)).thenReturn("other");
+        when(mq.getAt(1)).thenReturn("@#%");
+        when(mq.getAt(2)).thenReturn("@#%");
+
+        assertEquals(2, compute.countNumberOfOccurrences("@#%"));
+    }    
+
+ @Test
+    public void testCountNumberOfOccurrences_EmptyString() {
+        when(mq.size()).thenReturn(7);
+        when(mq.contains("")).thenReturn(true);
+        when(mq.getAt(0)).thenReturn("");
+        when(mq.getAt(1)).thenReturn("something");
+        when(mq.getAt(2)).thenReturn("");
+        
+        assertEquals(2, compute.countNumberOfOccurrences(""));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCountNumberOfOccurrences_NullElement() {
+        when(mq.size()).thenReturn(3);
+        when(mq.contains(null)).thenReturn(true);
+        when(mq.getAt(0)).thenReturn(null);
+        when(mq.getAt(1)).thenReturn("test");
+        when(mq.getAt(2)).thenReturn(null);
+
+        compute.countNumberOfOccurrences(null);
+    }
 
 }
